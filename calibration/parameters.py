@@ -15,16 +15,21 @@ def camera_parameters(file):
 
 
 #Load cameras parameters
-K0, R0, T0, res0, dis0 = camera_parameters('0.json')
-K1, R1, T1, res1, dis1 = camera_parameters('1.json')
-K2, R2, T2, res2, dis2 = camera_parameters('2.json')
-K3, R3, T3, res3, dis3 = camera_parameters('3.json')
+def get_parameters():
+    K0, R0, T0, res0, dis0 = camera_parameters('calibration/0.json')
+    K1, R1, T1, res1, dis1 = camera_parameters('calibration/1.json')
+    K2, R2, T2, res2, dis2 = camera_parameters('calibration/2.json')
+    K3, R3, T3, res3, dis3 = camera_parameters('calibration/3.json')
+    parameters = [[K0, R0, T0, res0, dis0],[K1, R1, T1, res1, dis1],
+                [K2, R2, T2, res2, dis2],[K3, R3, T3, res3, dis3]]
+    #print(parameters)
+    return parameters
 
 
-print('Camera 0\n')
-print('Resolucao',res0,'\n')
-print('Parametros intrinsecos:\n', K0, '\n')
-print('Parametros extrinsecos:\n')
-print('R0\n', R0, '\n')
-print('T0\n', T0, '\n')
-print('Distorcao Radial:\n', dis0)
+# print('Camera 0\n')
+# print('Resolucao',res0,'\n')
+# print('Parametros intrinsecos:\n', K0, '\n')
+# print('Parametros extrinsecos:\n')
+# print('R0\n', R0, '\n')
+# print('T0\n', T0, '\n')
+# print('Distorcao Radial:\n', dis0)
