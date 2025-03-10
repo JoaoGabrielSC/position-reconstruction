@@ -54,6 +54,7 @@ DATA DE ENTREGA: 17/03/2023
 O projeto pode ser executado das seguintes formas:
 - Caminhos padrões:
     src/calibration
+    
     ./video
 
 ```bash
