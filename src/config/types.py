@@ -9,7 +9,7 @@ class JsonParameters(StrEnum):
     Doubles = "doubles",
     Tf = "tf",
     Resolution = "resolution",
-    Distorcion = "distorcion"
+    Distorcion = "distortion"
     Width = "width",
     Height = "height",
 
