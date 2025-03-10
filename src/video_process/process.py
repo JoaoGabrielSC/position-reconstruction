@@ -9,11 +9,22 @@ class VideoProcessor:
     def __init__(self) -> None:
         pass
 
-    def process_video_for_camera(self, file_name: str):
+    def process_video_for_camera(self, file_name: str) -> list:
+        """
+        Processa um vídeo específico para detectar marcadores ArUco e extrair as posições dos marcadores.
+        
+        Args:
+            file_name (str): O caminho do arquivo de vídeo a ser processado.
+        
+        Returns:
+            list: Lista contendo as posições dos marcadores para cada frame do vídeo processado.
+                  Caso não haja marcadores, retorna uma lista vazia.
+        """
         aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
         parameters = cv2.aruco.DetectorParameters()
-        return self.process_videos([file_name], aruco_dict, parameters)[0]
 
+        return self.process_videos([file_name], aruco_dict, parameters)[0]
+    
     def process_videos(self, file_list: list[str], aruco_dict: Dictionary, parameters):
         """
         Processa vídeos para detectar marcadores ArUco e extrair posições.
