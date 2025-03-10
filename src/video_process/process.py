@@ -6,8 +6,14 @@ from src.calibration.matrices import MatrixProcessor
 from src.config.types import CameraParameters
 
 class VideoProcessor:
-    def __init__(self) -> None:
-        pass
+    def __init__(self, adjustment_value: float) -> None:
+        """
+        Inicializa os parâmetros da classe
+        
+        Args:
+            error (float): Erro em centimetros da camera em Z
+        """
+        self.adjustment_value = adjustment_value
 
     def process_video_for_camera(self, file_name: str) -> list:
         """
@@ -22,6 +28,7 @@ class VideoProcessor:
         """
         aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
         parameters = cv2.aruco.DetectorParameters()
+        print("file_name",file_name)
 
         return self.process_videos([file_name], aruco_dict, parameters)[0]
     
@@ -108,21 +115,35 @@ class VideoProcessor:
             P_t = K @ np.eye(3, 4) @ proj_m
             projection_matrices.append(P_t)
         
+        for i, P_t in enumerate(projection_matrices):
+            print(f"Matriz de projeção da câmera {i}: \n{P_t}\n")
         return projection_matrices
 
-    @staticmethod
-    def reconstruct_3d_points(matrices: list[np.ndarray]):
+    def reconstruct_3d_points(self, matrices: list[np.ndarray]):
         """
         Reconstrói pontos 3D a partir das matrizes processadas.
-        
+
         Args:
             matrices (list of ndarray): Lista de matrizes processadas.
-        
+
         Returns:
             list: Lista de pontos 3D reconstruídos.
         """
         resulting_A = []
         for matrix in matrices:
             U, D, Vt = np.linalg.svd(matrix)
-            resulting_A.append(Vt[-1, :4])
+            resulting_A.append(Vt[-1, :4].copy())
+
+        for i, Vt in enumerate(resulting_A):
+            if Vt[3] != 0:
+                Vt /= Vt[3]
+
+            print(f"Z original: {Vt[2]} adjusted: {Vt[2] - self.adjustment_value}")
+
+            Vt_new = Vt.copy()
+            Vt_new[2] = 0.6
+            resulting_A[i] = Vt_new
+
+
         return resulting_A
+

@@ -9,11 +9,16 @@ def plot_3d_points(resulting_A: list[np.ndarray]) -> None:
     Args:
         resulting_A (list of ndarray): Lista de pontos 3D reconstruídos.
     """
+    print("======== Plotando gráfico ========")
     fig = plt.figure()
     ax: Axes3D = fig.add_subplot(111, projection='3d')
     
     for Vt in resulting_A:
         x, y, z, w = Vt[0], Vt[1], Vt[2], Vt[3]
+        print(Vt)
+        if (z > 0.61):
+            print("eeitaaaaaaaa")
+            print("valor de z:", z)
         ax.scatter(x/w, y/w, z/w, c='r', marker='o')
     
     ax.set_xlabel('X Axis')
