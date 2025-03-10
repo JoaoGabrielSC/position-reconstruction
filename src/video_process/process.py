@@ -129,21 +129,49 @@ class VideoProcessor:
         Returns:
             list: Lista de pontos 3D reconstruídos.
         """
-        resulting_A = []
+        raw_points = []
         for matrix in matrices:
             U, D, Vt = np.linalg.svd(matrix)
-            resulting_A.append(Vt[-1, :4].copy())
+            raw_points.append(Vt[-1, :4].copy())
 
+        points = self.normalize_values(raw_points)
+
+        z_values = [Vt[2] for Vt in points]
+        mean_z = np.mean(z_values)
+
+        return self.estimate_z_mean(points, mean_z)
+
+    def estimate_z_mean(self, points: list[np.ndarray], mean_z: float) -> list[np.ndarray]:
+            """
+            Ajusta os valores de Z nos pontos 3D para que todos tenham o valor médio especificado.
+
+            Args:
+                points (List[np.ndarray]): Lista de pontos 3D a serem ajustados.
+                mean_z (float): O valor médio de Z a ser normalizado.
+
+            Returns:
+                List[np.ndarray]: Lista de pontos 3D com o valor de Z ajustado.
+            """
+            for i, Vt in enumerate(points):
+                Vt_new = Vt.copy()
+                Vt_new[2] -= (Vt_new[2] - mean_z)
+                points[i] = Vt_new
+            
+            return points
+
+    def normalize_values(self, resulting_A: list[np.ndarray]) -> list[np.ndarray]:
+        """
+        Normaliza os valores de cada ponto 3D, dividindo-os pelo valor de Z se Z não for zero.
+
+        Args:
+            resulting_A (List[np.ndarray]): Lista de pontos 3D a serem normalizados.
+
+        Returns:
+            List[np.ndarray]: Lista de pontos 3D normalizados.
+        """
         for i, Vt in enumerate(resulting_A):
             if Vt[3] != 0:
                 Vt /= Vt[3]
-
-            print(f"Z original: {Vt[2]} adjusted: {Vt[2] - self.adjustment_value}")
-
-            Vt_new = Vt.copy()
-            Vt_new[2] = 0.6
-            resulting_A[i] = Vt_new
-
 
         return resulting_A
 
