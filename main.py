@@ -1,6 +1,4 @@
-import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 from multiprocessing import Pool
 from src.calibration.parameters import Camera
 from src.calibration.matrices import MatrixProcessor
