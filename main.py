@@ -23,6 +23,8 @@ def main():
         video_marker_positions = pool.map(video_processor.process_video_for_camera, file_list)
 
     camera_projection_matrices = video_processor.compute_camera_matrices(cameras)
+    
+    print(camera_projection_matrices)
 
     matrices = []
     for i in range(len(video_marker_positions[0])):

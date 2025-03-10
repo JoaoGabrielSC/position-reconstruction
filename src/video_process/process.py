@@ -28,11 +28,18 @@ class VideoProcessor:
         """
         video_marker_positions = []
         
-        for idx, file in enumerate(file_list):
+        for file in (file_list):
             vid = cv2.VideoCapture(file)
             current_frame_marker_positions = []
+            file_idx = file.split('camera-')[1].split('.mp4')[0]
+            idx = int(file_idx[-1])
             window_name = f"Video {idx}"
             cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+            
+            # Definindo a posição da janela na tela para ver todos os videos
+            x = (idx % 2) * 640
+            y = (idx // 2) * 480
+            cv2.moveWindow(window_name, x, y)
 
             while True:
                 ret, img = vid.read()
@@ -48,9 +55,18 @@ class VideoProcessor:
                 marker_positions = processor.calculate_means() if corners_with_id_0 else np.array([[]])
                 current_frame_marker_positions.append(marker_positions)
 
-                cv2.imshow(window_name, img)
+                resized_img = cv2.resize(img, (640, 480))
+
+                if ids is not None:
+                    for corner in corners_with_id_0:
+                        resized_corners = corner * (640 / img.shape[1], 480 / img.shape[0])
+                        resized_corners = resized_corners.astype(int)
+                        cv2.aruco.drawDetectedMarkers(resized_img, [resized_corners], np.array([0]))
+
+                cv2.imshow(window_name, resized_img)
                 if cv2.waitKey(1) == ord('q'):
                     break
+            idx +=1
 
             cv2.destroyWindow(window_name)
             video_marker_positions.append(current_frame_marker_positions)
