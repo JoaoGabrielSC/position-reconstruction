@@ -50,12 +50,11 @@ DATA DE ENTREGA: 17/03/2023
         └── video_aruco.py
 
 # Rode o Projeto
+#### Caminhos padrões:
+    src/calibration
+    ./video
 
 O projeto pode ser executado das seguintes formas:
-- Caminhos padrões:
-    src/calibration
-    
-    ./video
 
 ```bash
 make run
