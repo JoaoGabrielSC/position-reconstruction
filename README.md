@@ -20,7 +20,7 @@ ATENÇÃO: Existem rotinas de detecção de ARUCO que já fornecem sua localiza�
 
 DATA DE ENTREGA: 17/03/2023
 
-# Estrutua das pastas
+# Estrutura das pastas
     .
     ├── Makefile
     ├── README.md
