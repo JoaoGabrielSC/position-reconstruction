@@ -1,4 +1,3 @@
-from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 from multiprocessing import Pool
 from src.calibration.parameters import Camera
