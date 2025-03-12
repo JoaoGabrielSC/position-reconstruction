@@ -1,4 +1,3 @@
-import asyncio
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 from multiprocessing import Pool
