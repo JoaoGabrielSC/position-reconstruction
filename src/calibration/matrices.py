@@ -15,7 +15,7 @@ class MatrixProcessor:
         self.matrix = matrix
         self.P = P
 
-    def calculate_means(self):
+    def calculate_means(self) -> tuple[np.ndarray, np.ndarray]:
         """
         Calculates the means of specific slices of the matrix assuming a specific shape.
 
@@ -37,7 +37,7 @@ class MatrixProcessor:
         
         return cx, cy
 
-    def filter_non_empty_matrices(self):
+    def filter_non_empty_matrices(self) -> tuple[list[np.ndarray], list[int]]:
         """
         Filters out empty matrices from the list and returns the non-empty matrices 
         along with their corresponding indices.
@@ -49,7 +49,7 @@ class MatrixProcessor:
         non_empty_matrix = [m[0] for m in self.matrix if m[0].size > 0]
         return non_empty_matrix, non_empty_indices
 
-    def verify_matrices(self, non_empty_matrix):
+    def verify_matrices(self, non_empty_matrix) -> bool:
         """
         Verifies if there are enough non-empty matrices to proceed with concatenation.
         
@@ -61,7 +61,7 @@ class MatrixProcessor:
         """
         return len(non_empty_matrix) >= 2
 
-    def concatenate_matrices(self, non_empty_matrix, non_empty_indices):
+    def concatenate_matrices(self, non_empty_matrix, non_empty_indices) -> np.ndarray:
         """
         Concatenates the non-empty matrices into a single matrix based on specific transformation criteria.
         
@@ -92,7 +92,7 @@ class MatrixProcessor:
         matrix_result = np.vstack(lines)
         return matrix_result
 
-    def process_and_concatenate(self):
+    def process_and_concatenate(self) -> Optional[np.ndarray]:
         """
         Filters non-empty matrices, verifies if there are enough matrices for concatenation, 
         and then concatenates them.
