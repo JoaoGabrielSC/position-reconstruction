@@ -18,7 +18,14 @@ Informações a serem consideradas:
 ATENÇÃO: Existem rotinas de detecção de ARUCO que já fornecem sua localização e orientação 3D, se a calibração da câmera e o tamanho do padrão forem fornecidas. Essas rotinas poderão ser usadas para fazer comparações com a reconstrução 3D fornecida pelo trabalho de vocês, mas não serão aceitas como o trabalho a ser feito. Portanto, lembrem-se que vocês deverão desenvolver a rotina de reconstrução, a partir da detecção do ARUCO acoplado ao robô nas imagens 2D capturadas nos vídeos.
 
 
-DATA DE ENTREGA: 17/03/2023
+
+# Resultados
+https://github.com/user-attachments/assets/27f32e5b-96fb-42cf-bb77-7c96d7c98767
+
+<img src="https://github.com/user-attachments/assets/72c136ba-22e7-4242-9d42-61f27dc48eff" alt="Imagem 2" width="800">
+
+
+
 
 # Estrutura das pastas
     .
