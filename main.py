@@ -12,7 +12,7 @@ videos_prefix_name: str = "camera-0"
 THREAD_POOL_SIZE: int = 4
 
 def main():
-    video_processor = VideoProcessor(adjustment_value=0.05)
+    video_processor = VideoProcessor()
     parser = Parser().get_arguments()
     config_dir = parser.config_dir
     videos_path = parser.videos_path

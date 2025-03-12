@@ -6,14 +6,8 @@ from src.calibration.matrices import MatrixProcessor
 from src.config.types import CameraParameters
 
 class VideoProcessor:
-    def __init__(self, adjustment_value: float) -> None:
-        """
-        Inicializa os parâmetros da classe
-        
-        Args:
-            error (float): Erro em centimetros da camera em Z
-        """
-        self.adjustment_value = adjustment_value
+    def __init__(self) -> None:
+        pass
 
     def process_video_for_camera(self, file_name: str) -> list:
         """
