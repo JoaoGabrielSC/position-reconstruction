@@ -1,3 +1,4 @@
+# Descrição do Trabalho
 Neste trabalho devemos detectar o robô nos vídeos das 4 câmeras do espaço inteligente e obter a reconstrução da sua posição 3D no mundo. Feito isso, vocês deverão gerar um gráfico da posição do robô, mostrando a trajetória que ele realizou.
 
 Para detectar o robô será usado um marcador ARUCO acoplado a sua plataforma. Rotinas de detecção desse tipo de marcador poderão ser usadas para obter sua posição central, assim como as suas quinas nas imagens. Essas informações, juntamente com os dados de calibração das câmeras, poderão ser usadas para localização 3D do robô.
@@ -18,3 +19,49 @@ ATENÇÃO: Existem rotinas de detecção de ARUCO que já fornecem sua localiza�
 
 
 DATA DE ENTREGA: 17/03/2023
+
+# Estrutura das pastas
+    .
+    ├── Makefile
+    ├── README.md
+    ├── main.py
+    ├── requirements.txt
+    ├── src
+    │   ├── calibration
+    │   │   ├── 0.json
+    │   │   ├── 1.json
+    │   │   ├── 2.json
+    │   │   ├── 3.json
+    │   │   ├── matrices.py
+    │   │   └── parameters.py
+    │   ├── config
+    │   │   ├── __init__.py
+    │   │   └── types.py
+    │   ├── parser
+    │   │   └── __init__.py
+    │   └── video_process
+    │       ├── plot_results.py
+    │       └── process.py
+    └── videos
+        ├── camera-00.mp4
+        ├── camera-01.mp4
+        ├── camera-02.mp4
+        ├── camera-03.mp4
+        └── video_aruco.py
+
+# Rode o Projeto
+#### Caminhos padrões:
+    src/calibration
+    ./video
+
+O projeto pode ser executado das seguintes formas:
+
+```bash
+make run
+# ou
+python main.py
+# ou
+python main.py --config_dir "caminho/pasta/calibration" --videos_path "caminho/para/videos"
+```
+Se o primeiro ou o segundo método for utilizado, sem nenhuma flag, os arquivos serão buscados nos caminhos padrão definidos nas opções acima.
+Portanto, certifique-se de que os arquivos .json de calibração e os vídeos .mp4 estejam na pasta correta antes da execução.
