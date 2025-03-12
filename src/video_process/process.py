@@ -86,7 +86,7 @@ class VideoProcessor:
         return video_marker_positions
 
     @staticmethod
-    def compute_camera_matrices(cameras: list[CameraParameters]):
+    def compute_camera_matrices(cameras: list[CameraParameters]) -> list:
         """
         Calcula as matrizes de projeção das câmeras.
         
@@ -113,7 +113,7 @@ class VideoProcessor:
             print(f"Matriz de projeção da câmera {i}: \n{P_t}\n")
         return projection_matrices
 
-    def reconstruct_3d_points(self, matrices: list[np.ndarray]):
+    def reconstruct_3d_points(self, matrices: list[np.ndarray]) -> list:
         """
         Reconstrói pontos 3D a partir das matrizes processadas.
 
